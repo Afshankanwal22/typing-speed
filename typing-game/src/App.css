@@ -1,0 +1,273 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+  background: radial-gradient(circle at top left, #00111f, #02040a, #000);
+}
+
+/* ==== Gradient Background ==== */
+.app-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, #00eaff, #0072ff, #0a0a1f, #00ff99);
+  background-size: 800% 800%;
+  animation: gradientShift 15s ease infinite;
+  z-index: -2;
+  opacity: 0.8;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==== Floating Neon Particles ==== */
+.app-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(0,255,255,0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation: moveParticles 30s linear infinite;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+@keyframes moveParticles {
+  0% { transform: translate(0,0); }
+  50% { transform: translate(-50px,50px); }
+  100% { transform: translate(0,0); }
+}
+
+/* ==== Modern App Card ==== */
+.app {
+  width: 850px;
+  max-width: 95%;
+  background: rgba(20, 25, 45, 0.75);
+  border-radius: 20px;
+  padding: 28px 32px;
+  text-align: center;
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  box-shadow:
+    0 0 25px rgba(0, 255, 255, 0.25),
+    inset 0 0 30px rgba(0, 255, 255, 0.05);
+  backdrop-filter: blur(15px) saturate(160%);
+  animation: fadeIn 1s ease;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.app:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    0 0 55px rgba(0, 255, 255, 0.5),
+    inset 0 0 35px rgba(0, 255, 255, 0.1);
+}
+
+/* ==== Title ==== */
+.title {
+  color: #00faff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 0 15px #00eaff, 0 0 25px #0072ff;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  animation: glowPulse 2s infinite alternate;
+}
+@keyframes glowPulse {
+  from { text-shadow: 0 0 10px #00eaff, 0 0 20px #0072ff; }
+  to { text-shadow: 0 0 30px #00faff, 0 0 50px #00ffcc; }
+}
+
+/* ==== Timer ==== */
+.timer-box {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #ffea00;
+  font-weight: 700;
+  text-shadow: 0 0 12px #ffea00, 0 0 20px #ffaa00;
+}
+
+/* ==== Text Box ==== */
+.text-box {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 15px;
+  padding: 18px;
+  font-size: 1rem;
+  margin-bottom: 18px;
+  line-height: 1.8;
+  text-align: justify;
+  box-shadow: inset 0 0 15px rgba(0, 255, 255, 0.15);
+  transition: 0.3s ease;
+}
+
+.text-box span {
+  transition: color 0.2s ease;
+}
+
+/* ==== Textarea ==== */
+textarea {
+  width: 100%;
+  height: 90px;
+  border-radius: 12px;
+  background: rgba(0, 255, 255, 0.08);
+  color: #00eaff;
+  border: none;
+  padding: 14px;
+  outline: none;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  resize: none;
+  box-shadow: inset 0 0 12px rgba(0, 255, 255, 0.15);
+  transition: 0.3s ease;
+}
+textarea:focus {
+  background: rgba(0, 255, 255, 0.12);
+  box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.25);
+}
+
+/* ==== Stats ==== */
+.stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: rgba(0, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 18px;
+  font-size: 1rem;
+  border: 1px solid rgba(0, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+.stats div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.25);
+}
+
+/* ==== Start Button ==== */
+.btn-gradient, .try-again-btn {
+  background: linear-gradient(90deg, #00eaff, #00ff99);
+  border: none;
+  color: #000;
+  font-weight: 700;
+  padding: 12px 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px #00ffcc;
+}
+.btn-gradient:hover, .try-again-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px #00ffcc;
+}
+
+/* ==== Keyboard ==== */
+.keyboard {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.key {
+  flex: 0 0 55px;
+  height: 45px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  background: rgba(0, 255, 255, 0.1);
+  color: #00eaff;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.25);
+  transition: all 0.25s ease;
+  font-size: 1rem;
+}
+.key:hover {
+  background: rgba(0, 255, 255, 0.3);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 22px #00eaff99;
+}
+.key.active {
+  background: #00eaff;
+  color: #000;
+  box-shadow: 0 0 35px #00eaff, 0 0 45px #00ffcc;
+  transform: scale(1.15);
+}
+.key.space { flex: 0 0 300px; }
+.key.back { flex: 0 0 120px; color: #ff4d4d; box-shadow: 0 0 18px rgba(255,77,77,0.5); }
+
+/* ==== Result Card ==== */
+.result-card {
+  background: rgba(15, 25, 40, 0.95);
+  border-radius: 25px;
+  padding: 40px 35px;
+  width: 450px;
+  text-align: center;
+  border: 2px solid rgba(0, 255, 255, 0.25);
+  box-shadow: 0 0 55px rgba(0, 255, 255, 0.4),
+              inset 0 0 30px rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+  animation: fadeIn 0.8s ease;
+}
+.result-title {
+  font-size: 2rem;
+  color: #00eaff;
+  text-shadow: 0 0 25px #00eaff;
+  margin-bottom: 25px;
+  animation: glowPulse 2s infinite alternate;
+}
+.result-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 25px;
+}
+.stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 14px 16px;
+  border-radius: 15px;
+  font-size: 1.05rem;
+  box-shadow: inset 0 0 15px rgba(0,255,255,0.08);
+  transition: all 0.3s ease;
+}
+.stat-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+}
+.stat-icon { font-size: 1.3rem; margin-right: 10px; }
+.stat-label { flex:1; text-align:left; color:#00faff; }
+.stat-value { font-weight:700; color:#00ff88; text-shadow:0 0 10px #00ff88; }
+
+/* ==== Responsive ==== */
+@media (max-width: 768px) {
+  .app { width: 95%; padding: 20px; }
+  .key { flex:0 0 45px; height:38px; }
+  .key.space { flex:0 0 200px; }
+  .key.back { flex:0 0 90px; }
+  .result-card { width: 90%; padding: 35px 25px; }
+}

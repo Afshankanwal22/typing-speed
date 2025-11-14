@@ -289,5 +289,6 @@ textarea:focus {
   z-index: 10;
 }
 .music-btn:hover {
-  background: #00c4cc;
+  background: hsl(182, 64%, 67%);
 }
+

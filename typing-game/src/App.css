@@ -271,3 +271,23 @@ textarea:focus {
   .key.back { flex:0 0 90px; }
   .result-card { width: 90%; padding: 35px 25px; }
 }
+.result-card .btn-gradient {
+  margin-top: 15px;  /* upar se thoda gap */
+  margin-bottom: 10px; /* neeche se gap agar needed ho */
+}
+.music-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 8px 12px;
+  background: #00eaff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #000;
+  font-weight: bold;
+  z-index: 10;
+}
+.music-btn:hover {
+  background: #00c4cc;
+}

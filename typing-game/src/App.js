@@ -1,6 +1,8 @@
+// App.jsx
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 
+// ===== Level Data =====
 const levelData = {
   1: {
     name: "Beginner",
@@ -24,13 +26,12 @@ const levelData = {
     name: "Advanced",
     time: 30,
     sentences: [
-     "The art of fast and precise typing requires dedication, rhythm, and intense concentration. Each word you type becomes a reflection of your control, focus, and the hours you’ve spent honing your craft. It’s not just about hitting the keys quickly.It’s about syncing your mind and fingers in perfect harmony.",
-    "JavaScript and React together make the modern web dynamic, interactive, and efficient. React’s component-based design allows developers to craft reusable, scalable, and organized user interfaces, while JavaScript adds flexibility and power to bring those interfaces to life. Together, they form the backbone of modern frontend development.",
-     "Consistency in effort transforms ordinary practice into extraordinary performance. Every small step forward, every minute of focus, and every moment of persistence adds up over time. Just like great coders and typists, you don’t master your craft overnight — you evolve through patience, repetition, and the willingness to improve a little more each day."
+      "The art of fast and precise typing requires dedication, rhythm, and intense concentration. Each word you type becomes a reflection of your control, focus, and the hours you’ve spent honing your craft. It’s not just about hitting the keys quickly. It’s about syncing your mind and fingers in perfect harmony.",
+      "JavaScript and React together make the modern web dynamic, interactive, and efficient. React’s component-based design allows developers to craft reusable, scalable, and organized user interfaces, while JavaScript adds flexibility and power to bring those interfaces to life. Together, they form the backbone of modern frontend development.",
+      "Consistency in effort transforms ordinary practice into extraordinary performance. Every small step forward, every minute of focus, and every moment of persistence adds up over time. Just like great coders and typists, you don’t master your craft overnight — you evolve through patience, repetition, and the willingness to improve a little more each day."
     ]
   }
 };
-
 
 // ===== Particle Background Component =====
 function ParticleBackground() {
@@ -84,10 +85,14 @@ export default function App() {
   const [accuracy, setAccuracy] = useState(100);
   const [showResult, setShowResult] = useState(false);
   const [highlightKey, setHighlightKey] = useState("");
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false); // start off
   const inputRef = useRef(null);
+  const musicRef = useRef(null); // Audio reference
 
+  // Generate sentence when level changes
   useEffect(() => generateSentence(), [level]);
 
+  // Timer
   useEffect(() => {
     if (isActive && timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
@@ -97,6 +102,7 @@ export default function App() {
     }
   }, [isActive, timeLeft]);
 
+  // Key highlight
   useEffect(() => {
     const handleKeyDown = (e) => setHighlightKey(e.key.toUpperCase());
     const handleKeyUp = () => setHighlightKey("");
@@ -108,6 +114,7 @@ export default function App() {
     };
   }, []);
 
+  // Generate random sentence
   const generateSentence = () => {
     const sentences = levelData[level].sentences;
     const sentence = sentences[Math.floor(Math.random() * sentences.length)];
@@ -115,6 +122,7 @@ export default function App() {
     setInput("");
   };
 
+  // Handle typing input
   const handleInput = (e) => {
     const value = e.target.value;
     setInput(value);
@@ -124,6 +132,7 @@ export default function App() {
     setAccuracy(acc);
   };
 
+  // Start or restart game
   const startGame = () => {
     setTimeLeft(levelData[level].time);
     setIsActive(true);
@@ -132,8 +141,16 @@ export default function App() {
     setShowResult(false);
     generateSentence();
     setTimeout(() => inputRef.current?.focus(), 100);
+
+    // ✅ Play music on user click
+    if (musicRef.current) {
+      musicRef.current.currentTime = 0;
+      musicRef.current.play().catch(err => console.log("Audio blocked:", err));
+      setIsMusicPlaying(true);
+    }
   };
 
+  // Finish game
   const finishGame = () => {
     setIsActive(false);
     const wordsTyped = input.trim().split(" ").length;
@@ -141,6 +158,7 @@ export default function App() {
     setShowResult(true);
   };
 
+  // Next level
   const nextLevel = () => {
     if (level < 3) {
       setLevel(level + 1);
@@ -152,6 +170,7 @@ export default function App() {
     }
   };
 
+  // Handle on-screen keyboard click
   const handleClickKey = (key) => {
     if (!isActive) return;
     if (key === "SPACE") setInput((prev) => prev + " ");
@@ -161,12 +180,24 @@ export default function App() {
     setTimeout(() => setHighlightKey(""), 150);
   };
 
+  // Toggle music
+  const toggleMusic = () => {
+    if (!isMusicPlaying) {
+      musicRef.current?.play().catch(err => console.log("Play blocked", err));
+    } else {
+      musicRef.current?.pause();
+    }
+    setIsMusicPlaying(!isMusicPlaying);
+  };
+
+  // Keyboard layout
   const keys = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     ["Z", "X", "C", "V", "B", "N", "M"]
   ];
 
+  // Show result page
   if (showResult) {
     return (
       <div className="app-container">
@@ -192,11 +223,22 @@ export default function App() {
     );
   }
 
+  // Main game page
   return (
     <div className="app-container">
       <ParticleBackground />
+
+      {/* Music */}
+      <audio ref={musicRef} src="/mixkit-deep-urban-623.mp3" preload="auto" loop />
+
       <div className="app">
         <h1 className="title">⚡ Typing Master Pro</h1>
+
+        {/* Music toggle button */}
+        <button className="music-btn" onClick={toggleMusic}>
+          {isMusicPlaying ? "🔊 Music On" : "🔇 Music Off"}
+        </button>
+
         <p className="level-display">🎮 Level {level} - {levelData[level].name}</p>
         <div className="timer-box">
           <span className={timeLeft < 10 ? "low-time" : ""}>⏱ {timeLeft}s</span>

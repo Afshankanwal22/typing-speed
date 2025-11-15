@@ -272,8 +272,8 @@ textarea:focus {
   .result-card { width: 90%; padding: 35px 25px; }
 }
 .result-card .btn-gradient {
-  margin-top: 15px;  /* upar se thoda gap */
-  margin-bottom: 10px; /* neeche se gap agar needed ho */
+  margin-top: 15px;  
+  margin-bottom: 10px; 
 }
 .music-btn {
   position: absolute;

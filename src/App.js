@@ -15,7 +15,7 @@ const levelData = {
   },
   2: {
     name: "Intermediate",
-    time: 45,
+    time: 60,
     sentences: [
       "React empowers developers to build fast, responsive, and modern web interfaces using reusable components. It simplifies user interface management, allowing developers to focus on creativity and logic instead of repetitive code.",
       "The journey to mastery is built through consistent practice and focus on details. Whether it's coding, typing, or learning a new skill, small daily efforts compound into something extraordinary over time.",
@@ -24,7 +24,7 @@ const levelData = {
   },
   3: {
     name: "Advanced",
-    time: 30,
+    time: 60,
     sentences: [
       "The art of fast and precise typing requires dedication, rhythm, and intense concentration. Each word you type becomes a reflection of your control, focus, and the hours you’ve spent honing your craft. It’s not just about hitting the keys quickly. It’s about syncing your mind and fingers in perfect harmony.",
       "JavaScript and React together make the modern web dynamic, interactive, and efficient. React’s component-based design allows developers to craft reusable, scalable, and organized user interfaces, while JavaScript adds flexibility and power to bring those interfaces to life. Together, they form the backbone of modern frontend development.",
